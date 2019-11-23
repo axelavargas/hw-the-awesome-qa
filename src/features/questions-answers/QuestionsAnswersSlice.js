@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 const uuidv4 = require("uuid/v4");
 
+export const SortOptions = {
+  ASCENDING: "ASCENDING",
+  DESCENDING: "DESCENDING"
+};
+
 const initialState = {
   questionsById: {},
   questionsAllIds: [],
   error: null,
   isLoading: false,
+  sortOption: SortOptions.ASCENDING
 };
 
 function startLoading(state) {
@@ -38,10 +44,10 @@ const QuestionsAnswersSlice = createSlice({
     loadingQuestionsFailure: loadingFailed,
     addNewQuestion: {
       reducer(state, action) {
-        const {question, answer } = action.payload.data;
+        const { question, answer } = action.payload.data;
         if (question && answer) {
           const id = action.payload.id;
-          const qa = {question, answer, id };
+          const qa = { question, answer, id };
           state.questionsAllIds.push(qa.id);
           state.questionsById[id] = qa;
         }
@@ -49,6 +55,25 @@ const QuestionsAnswersSlice = createSlice({
       },
       prepare(data) {
         return { payload: { data, id: uuidv4() } };
+      }
+    },
+    removeAllQuestions(state, action) {
+      //reset state to initial state
+      state.questionsAllIds = initialState.questionsAllIds;
+      state.questionsById = initialState.questionsById;
+      state.error = initialState.error;
+      state.isLoading = initialState.isLoading;
+    },
+    toggleSortOption(state, action) {
+      switch (action.payload) {
+        case SortOptions.ASCENDING:
+          state.sortOption = SortOptions.DESCENDING;
+          break;
+        case SortOptions.DESCENDING:
+          state.sortOption = SortOptions.ASCENDING;
+          break;
+        default:
+          state.sortOption = SortOptions.ASCENDING;
       }
     }
   }
@@ -58,7 +83,9 @@ export const {
   loadingQuestionsStart,
   loadingQuestionsSuccess,
   loadingQuestionsFailure,
-  addNewQuestion
+  addNewQuestion,
+  removeAllQuestions,
+  toggleSortOption
 } = QuestionsAnswersSlice.actions;
 
 async function getQuestions() {

@@ -1,13 +1,16 @@
 import questionsAnswers, {
   addNewQuestion,
-  loadingQuestionsSuccess
+  loadingQuestionsSuccess,
+  removeAllQuestions,
+  toggleSortOption
 } from "./QuestionsAnswersSlice";
 
 const initialState = {
   questionsById: {},
   questionsAllIds: [],
   error: null,
-  isLoading: false
+  isLoading: false,
+  sortOption: "ASCENDING"
 };
 
 const question = {
@@ -55,5 +58,40 @@ describe("QuestionAnswers reducer", () => {
         }
       })
     ).toEqual(newState);
+  });
+
+  it("should remove all questions from the state", () => {
+    expect(
+      questionsAnswers(initialStateWithQuestions, {
+        type: removeAllQuestions.type,
+        payload: {}
+      })
+    ).toEqual(initialState);
+  });
+
+  it("should toggle sorting to Descending alphabetically for questions", () => {
+    const stateDescending = {
+        ...initialState,
+        sortOption: 'ASCENDING'
+    }  
+    expect(
+      questionsAnswers(initialState, {
+        type: toggleSortOption.type,
+        payload: 'DESCENDING'
+      })
+    ).toEqual(stateDescending);
+  });
+
+  it("should toggle sorting to Ascending alphabetically for questions", () => {
+    const stateDescending = {
+        ...initialState,
+        sortOption: 'DESCENDING'
+    }  
+    expect(
+      questionsAnswers(initialState, {
+        type: toggleSortOption.type,
+        payload: 'ASCENDING'
+      })
+    ).toEqual(stateDescending);
   });
 });

@@ -7,6 +7,9 @@ function QForm({onSubmit}) {
   const handleSubmit = (evt) => {
       evt.preventDefault();
       onSubmit({question, answer});
+      setQuestion('');
+      setAnswer('');
+
   }
   return (
     <form onSubmit={handleSubmit}>
