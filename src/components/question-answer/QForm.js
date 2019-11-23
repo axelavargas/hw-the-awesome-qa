@@ -1,0 +1,91 @@
+import React, { useState } from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    flexGrow: 1,
+  },
+  margin: {
+    margin: theme.spacing(1)
+  },
+  withoutLabel: {
+    marginTop: theme.spacing(3)
+  }
+}));
+
+function QForm({ onSubmit }) {
+  const classes = useStyles();
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    onSubmit({ question, answer });
+    setQuestion("");
+    setAnswer("");
+  };
+  return (
+    <Grid
+      container
+      direction="row"
+      justify="space-around"
+      alignItems="stretch"
+      className={classes.root}
+    >
+       <Grid item xs={12}>
+        <Typography variant="h6">Create new Question</Typography>
+      </Grid>
+      <Grid item xs={12}>
+      <form onSubmit={handleSubmit}>
+        <Grid item xs={12}>
+          <TextField
+            required
+            className={classes.margin}
+            id="question"
+            label="Question"
+            value={question}
+            inputProps={{
+              "aria-label": "type question",
+              autoFocus: true
+            }}
+            onChange={e => setQuestion(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="question"
+            label="Answer"
+            value={answer}
+            className={classes.margin}
+            inputProps={{
+              "aria-label": "type answer"
+            }}
+            onChange={e => setAnswer(e.target.value)}
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Button
+            className={classes.margin}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Submit
+          </Button>
+        </Grid>
+      </form>
+      </Grid>
+
+    </Grid>
+  );
+}
+
+export default QForm;

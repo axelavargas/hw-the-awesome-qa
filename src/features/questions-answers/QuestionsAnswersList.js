@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { createSelector } from "@reduxjs/toolkit";
 import { connect, useDispatch } from "react-redux";
+import QuestionsList from "../../components/question-answer/QuestionsList";
+import Divider from "@material-ui/core/Divider";
 
 import {
   fetchQuestions,
@@ -8,7 +10,7 @@ import {
   toggleSortOption,
   SortOptions
 } from "./QuestionsAnswersSlice";
-import ActionsList from "../../components/ActionsList";
+import ActionsList from "../../components/question-answer/ActionsList";
 
 const questionsById = state => state.questions.questionsById;
 const questionsAllIds = state => state.questions.questionsAllIds;
@@ -81,12 +83,12 @@ function QuestionsAnswersList({ questions, sortedBy }) {
 
   return (
     <>
-      My QuestionsAnswers
+      <Divider variant="middle" />
       <ActionsList
         onRemoveQuestions={() => removeAllQA()}
         onSortQuestions={() => sortQA()}
       />
-      <pre>{JSON.stringify(questions, null, 2)}</pre>
+      <QuestionsList questions={questions} />
     </>
   );
 }

@@ -3,7 +3,7 @@ import { connect, useDispatch } from "react-redux";
 
 import { addNewQuestion } from "./QuestionsAnswersSlice";
 
-import QForm from '../../components/QForm';
+import QForm from '../../components/question-answer/QForm';
 
 const mapDispatch = {
   addNewQuestion
@@ -19,9 +19,7 @@ function QuestionsAnswersForm() {
   }
 
   return (
-    <>
       <QForm onSubmit={handleSubmit} />
-    </>
   );
 }
 
