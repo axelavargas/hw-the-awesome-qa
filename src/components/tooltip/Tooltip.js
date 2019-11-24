@@ -1,10 +1,29 @@
 import React, { useRef, useState } from "react";
 
 import TooltipPortal from "./TooltipPortal";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.grey[700],
+    borderRadius: theme.shape.borderRadius,
+    color: theme.palette.common.white,
+    fontFamily: theme.typography.fontFamily,
+    padding: theme.spacing(0.5, 1),
+    fontSize: theme.typography.pxToRem(10),
+    maxWidth: 300,
+    wordWrap: "break-word",
+    fontWeight: theme.typography.fontWeightMedium
+  },
+  trigger: {
+    borderBottom: `1px dashed ${theme.palette.text.secondary}`,
+  }
+}));
 
 function Tooltip(props) {
   //ref to the DOM element that will trigger the tooltip
   const triggerRef = useRef(null);
+  const classes = useStyles();
 
   //state
   const [visible, setVisible] = useState(false);
@@ -63,6 +82,7 @@ function Tooltip(props) {
   //display tooltip using the Tooltip Portal
   return (
     <span
+      className={classes.trigger}
       ref={triggerRef}
       onMouseEnter={showTooltip}
       onMouseLeave={hideTooltip}
@@ -72,7 +92,9 @@ function Tooltip(props) {
       {/* only show when is visible */}
       {visible ? (
         <TooltipPortal>
-          <div style={styleTooltip}>{props.text}</div>
+          <div className={classes.root} style={styleTooltip}>
+            {props.text}
+          </div>
         </TooltipPortal>
       ) : null}
     </span>
