@@ -7,6 +7,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types"; // ES6
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,4 +62,12 @@ function QuestionItem({ qaItem, onDeleteQuestion }) {
   );
 }
 
+QuestionItem.defaultProps = {
+  qaItem: { question: null, answer: null, id: null }
+};
+
+QuestionItem.propTypes = {
+  qaItem: PropTypes.object,
+  onDeleteQuestion: PropTypes.func.isRequired
+};
 export default QuestionItem;

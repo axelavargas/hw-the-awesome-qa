@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "../tooltip/Tooltip";
+import PropTypes from 'prop-types'; // ES6
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -91,6 +92,10 @@ function QForm({ onSubmit }) {
       </Grid>
     </Grid>
   );
+}
+
+QForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 }
 
 export default QForm;

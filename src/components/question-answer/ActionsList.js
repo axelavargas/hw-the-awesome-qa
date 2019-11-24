@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import PropTypes from 'prop-types'; // ES6
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,6 +37,11 @@ function ActionsList({ onRemoveQuestions, onSortQuestions }) {
       </Button>
     </Grid>
   );
+}
+
+ActionsList.propTypes = {
+    onRemoveQuestions: PropTypes.func.isRequired,
+    onSortQuestions: PropTypes.func.isRequired,
 }
 
 export default ActionsList;

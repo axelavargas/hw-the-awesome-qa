@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import QuestionItem from "./QuestionItem";
 import Tooltip from "../tooltip/Tooltip";
+import PropTypes from "prop-types"; // ES6
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,5 +49,14 @@ function QuestionList({ questions, onDeleteQuestion }) {
     </Grid>
   );
 }
+
+QuestionList.defaultProps = {
+  questions: []
+};
+
+QuestionList.propTypes = {
+  questions: PropTypes.array,
+  onDeleteQuestion: PropTypes.func.isRequired
+};
 
 export default QuestionList;
