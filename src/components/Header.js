@@ -16,7 +16,7 @@ function Header() {
   return (
     <AppBar className={classes.toolbar} position="static">
       <ToolBar>
-        <Typography variant="h6">The Awesome QA Tool</Typography>
+        <Typography variant="h4">The Awesome QA Tool</Typography>
       </ToolBar>
     </AppBar>
   );

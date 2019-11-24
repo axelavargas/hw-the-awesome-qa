@@ -14,6 +14,9 @@ const useStyles = makeStyles(theme => ({
   emptyList: {
     padding: theme.spacing(2, 1),
     backgroundColor: "#e0e0e0"
+  },
+  containerList: {
+    marginTop: theme.spacing(1)
   }
 }));
 
@@ -23,13 +26,13 @@ function QuestionList({ questions, onDeleteQuestion }) {
   return (
     <Grid container className={classes.root} alignItems="flex-start">
       <Grid item xs={12}>
-        <Typography variant="h6">
+        <Typography variant="h5">
           <Tooltip text="Here you can find the created questions and their answers">
             Questions Created
           </Tooltip>
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} className={classes.containerList}>
         {!questions.length ? (
           <Paper className={classes.emptyList}>
             <Typography component="p">No questions created</Typography>

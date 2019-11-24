@@ -12,11 +12,11 @@ import PropTypes from "prop-types"; // ES6
 const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: "none",
-    border: "1px solid #ccc"
+    border: "1px solid #ccc",
   },
   heading: {
     color: "#424242",
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(18),
     fontWeight: theme.typography.fontWeightBold
   },
   delete: {

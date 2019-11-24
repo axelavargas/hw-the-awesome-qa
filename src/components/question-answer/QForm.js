@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "../tooltip/Tooltip";
-import PropTypes from 'prop-types'; // ES6
+import PropTypes from "prop-types"; // ES6
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -14,6 +14,10 @@ const useStyles = makeStyles(theme => ({
   },
   margin: {
     margin: theme.spacing(1)
+  },
+  textField: {
+    margin: theme.spacing(1),
+    width: "90%"
   },
   withoutLabel: {
     marginTop: theme.spacing(3)
@@ -42,7 +46,7 @@ function QForm({ onSubmit }) {
       className={classes.root}
     >
       <Grid item xs={12}>
-        <Typography variant="h6" className={classes.heading}>
+        <Typography variant="h5" className={classes.heading}>
           <Tooltip text="Here you can create new questions and their answers">
             Create new Question
           </Tooltip>
@@ -53,7 +57,7 @@ function QForm({ onSubmit }) {
           <Grid item xs={12}>
             <TextField
               required
-              className={classes.margin}
+              className={classes.textField}
               id="question"
               label="Question"
               value={question}
@@ -70,7 +74,7 @@ function QForm({ onSubmit }) {
               id="question"
               label="Answer"
               value={answer}
-              className={classes.margin}
+              className={classes.textField}
               inputProps={{
                 "aria-label": "type answer"
               }}
@@ -84,6 +88,7 @@ function QForm({ onSubmit }) {
               type="submit"
               variant="contained"
               color="primary"
+              size="large"
             >
               Submit
             </Button>
@@ -95,7 +100,7 @@ function QForm({ onSubmit }) {
 }
 
 QForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-}
+  onSubmit: PropTypes.func.isRequired
+};
 
 export default QForm;

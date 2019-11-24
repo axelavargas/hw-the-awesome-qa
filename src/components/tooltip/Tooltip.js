@@ -9,11 +9,13 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.shape.borderRadius,
     color: theme.palette.common.white,
     fontFamily: theme.typography.fontFamily,
-    padding: theme.spacing(0.5, 1),
-    fontSize: theme.typography.pxToRem(10),
+    padding: theme.spacing(1, 2),
+    fontSize: theme.typography.pxToRem(16),
     maxWidth: 300,
     wordWrap: "break-word",
-    fontWeight: theme.typography.fontWeightMedium
+    fontWeight: theme.typography.fontWeightMedium,
+    position: "absolute",
+    background: "gray",
   },
   trigger: {
     borderBottom: `1px dashed ${theme.palette.text.secondary}`,
@@ -41,13 +43,6 @@ function Tooltip(props) {
   }
 
   function getPosition(triggerRef) {
-    //get position and size of triggerRef
-    const generalStyle = {
-      position: "absolute",
-      background: "gray",
-      width: "80%"
-    };
-
     //get scroll position
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
@@ -75,7 +70,6 @@ function Tooltip(props) {
       left: newLeft,
       top: tooltipTop,
       bottom: tooltipBottom,
-      ...generalStyle
     });
   }
 

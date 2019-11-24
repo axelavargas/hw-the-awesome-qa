@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 0)
   },
   margin: {
-    margin: theme.spacing(0.1)
+    margin: theme.spacing(0.1, 0.5)
   }
 }));
 
@@ -18,18 +18,18 @@ function ActionsList({ onRemoveQuestions, onSortQuestions }) {
   return (
     <Grid container justify="flex-start" className={classes.root}>
       <Button
-        variant="outlined"
+        variant="contained"
         color="default"
-        size="small"
+        size="medium"
         className={classes.margin}
         onClick={() => onSortQuestions()}
       >
         sort Questions
       </Button>
       <Button
-        variant="outlined"
+        variant="contained"
         color="secondary"
-        size="small"
+        size="medium"
         className={classes.margin}
         onClick={() => onRemoveQuestions()}
       >
