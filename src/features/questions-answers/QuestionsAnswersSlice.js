@@ -69,7 +69,9 @@ const QuestionsAnswersSlice = createSlice({
       let questionFilteredIds = [];
       let questionByIdFiltered = {};
 
-      questionFilteredIds = state.questionsAllIds.filter(CurrentId => id !== CurrentId);
+      questionFilteredIds = state.questionsAllIds.filter(
+        CurrentId => id !== CurrentId
+      );
 
       questionFilteredIds.map(id => {
         questionByIdFiltered[id] = state.questionsById[id];
@@ -79,7 +81,7 @@ const QuestionsAnswersSlice = createSlice({
       state.questionsAllIds = questionFilteredIds;
       state.questionsById = questionByIdFiltered;
     },
-    
+
     toggleSortOption(state, action) {
       switch (action.payload) {
         case SortOptions.ASCENDING:

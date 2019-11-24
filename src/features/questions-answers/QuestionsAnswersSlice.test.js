@@ -21,7 +21,7 @@ const questionUUID = {
 };
 
 const questionUUID2 = {
-  id: "uuid2",  
+  id: "uuid2",
   question: "shall we create another test?",
   answer: "yes!!"
 };

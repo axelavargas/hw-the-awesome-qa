@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
+
 import QuestionsList from "../../components/question-answer/QuestionsList";
-
-
+import ActionsList from "../../components/question-answer/ActionsList";
 import {sortedQuestions, sortedBy} from './QuestionAnswersSelectors';
 
 import {
@@ -11,7 +11,7 @@ import {
   toggleSortOption,
   deleteQuestion
 } from "./QuestionsAnswersSlice";
-import ActionsList from "../../components/question-answer/ActionsList";
+
 
 const mapDispatch = {
   fetchQuestions,

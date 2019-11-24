@@ -5,7 +5,6 @@ const questionsById = state => state.questions.questionsById;
 const questionsAllIds = state => state.questions.questionsAllIds;
 export const sortedBy = state => state.questions.sortOption;
 
-
 const selectAllQA = createSelector(
   questionsAllIds,
   questionsById,
@@ -26,6 +25,7 @@ function sortAlphabetically(a, b) {
   if (b.question.toLowerCase() > a.question.toLowerCase()) return 1;
   return 0;
 }
+
 export const sortedQuestions = createSelector(
   selectAllQA,
   sortedBy,

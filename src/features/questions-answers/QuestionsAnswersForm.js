@@ -1,8 +1,8 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 
-import { addNewQuestion } from "./QuestionsAnswersSlice";
 import QForm from "../../components/question-answer/QForm";
+import { addNewQuestion } from "./QuestionsAnswersSlice";
 
 const mapDispatch = {
   addNewQuestion

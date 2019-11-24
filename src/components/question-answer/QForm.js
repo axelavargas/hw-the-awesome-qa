@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types"; // ES6
+
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Tooltip from "../tooltip/Tooltip";
-import PropTypes from "prop-types"; // ES6
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { makeStyles } from "@material-ui/core/styles";
+
+import Tooltip from "../tooltip/Tooltip";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,9 +23,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     width: "90%"
   },
-  withoutLabel: {
-    marginTop: theme.spacing(3)
-  },
   heading: {
     color: theme.palette.text.primary
   }
@@ -31,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 function QForm({ onSubmit }) {
   const classes = useStyles();
+
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [withDelay, setWithDelay] = useState(false);
@@ -42,6 +42,7 @@ function QForm({ onSubmit }) {
     setAnswer("");
     setWithDelay(false);
   };
+
   return (
     <Grid
       container

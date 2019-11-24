@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types"; // ES6
+
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import QuestionItem from "./QuestionItem";
 import Tooltip from "../tooltip/Tooltip";
-import PropTypes from "prop-types"; // ES6
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {

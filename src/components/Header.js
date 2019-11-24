@@ -1,13 +1,13 @@
 import React from "react";
+
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from '@material-ui/core/styles';
-
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   }
 }));
 function Header() {
