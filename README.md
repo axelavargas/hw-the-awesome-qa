@@ -20,6 +20,7 @@ The challenge was to build 'The Awesome Q/A tool'
 
 Optional requirements:
 - Delete single question 
+- Add checkbox for adding a question with 5 seconds delay
 
 ## Some things that I could improve/add in the future
 - Improve tooltip implementation: current implementation is not scalable, I am assuming a tooltip of max 3 lines, not taking into account the size of the tooltip.

@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "../tooltip/Tooltip";
 import PropTypes from "prop-types"; // ES6
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,12 +33,14 @@ function QForm({ onSubmit }) {
   const classes = useStyles();
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
+  const [withDelay, setWithDelay] = useState(false);
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    onSubmit({ question, answer });
+    onSubmit({ question, answer }, withDelay);
     setQuestion("");
     setAnswer("");
+    setWithDelay(false);
   };
   return (
     <Grid
@@ -82,6 +86,18 @@ function QForm({ onSubmit }) {
             />
           </Grid>
 
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={withDelay}
+                  onChange={() => setWithDelay(!withDelay)}
+                  value="withDelay"
+                />
+              }
+              label="Add 5 seconds delay"
+            />
+          </Grid>
           <Grid item xs={12}>
             <Button
               className={classes.margin}
