@@ -12,8 +12,9 @@ const useStyles = makeStyles(theme => ({
     border: "1px solid #ccc",
   },
   heading: {
+    color: '#424242',
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
+    fontWeight: theme.typography.fontWeightBold
   }
 }));
 

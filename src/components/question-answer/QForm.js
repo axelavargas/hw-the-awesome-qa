@@ -7,15 +7,17 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
     flexGrow: 1,
+    marginTop: theme.spacing(2)
   },
   margin: {
     margin: theme.spacing(1)
   },
   withoutLabel: {
     marginTop: theme.spacing(3)
+  },
+  heading: {
+    color: theme.palette.text.primary
   }
 }));
 
@@ -35,11 +37,10 @@ function QForm({ onSubmit }) {
       container
       direction="row"
       justify="space-around"
-      alignItems="stretch"
       className={classes.root}
     >
        <Grid item xs={12}>
-        <Typography variant="h6">Create new Question</Typography>
+        <Typography variant="h6" className={classes.heading}>Create new Question</Typography>
       </Grid>
       <Grid item xs={12}>
       <form onSubmit={handleSubmit}>

@@ -7,8 +7,8 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
-    padding: '1em'
+    padding: theme.spacing(0, 2),
+    width: '90%'
   },
 }));
 function App() {
@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Grid container className={classes.root}>
+      <Grid container justify="center" className={classes.root}>
         <QuestionsAnswersList />
         <QuestionsAnswersForm />
       </Grid>
