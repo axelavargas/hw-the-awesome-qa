@@ -3,19 +3,19 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
-
 const useStyles = makeStyles(theme => ({
-   
-    margin: {
-      margin: theme.spacing(0.1)
-    }
-   
-  }));
+  root: {
+    margin: theme.spacing(2, 0)
+  },
+  margin: {
+    margin: theme.spacing(0.1)
+  }
+}));
 
 function ActionsList({ onRemoveQuestions, onSortQuestions }) {
   const classes = useStyles();
   return (
-    <Grid container justify="flex-end"    >
+    <Grid container justify="flex-start" className={classes.root}>
       <Button
         variant="outlined"
         color="default"

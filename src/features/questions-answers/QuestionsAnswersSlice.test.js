@@ -2,7 +2,8 @@ import questionsAnswers, {
   addNewQuestion,
   loadingQuestionsSuccess,
   removeAllQuestions,
-  toggleSortOption
+  toggleSortOption,
+  deleteQuestion
 } from "./QuestionsAnswersSlice";
 
 const initialState = {
@@ -13,14 +14,21 @@ const initialState = {
   sortOption: "ASCENDING"
 };
 
-const question = {
+const questionUUID = {
   id: "uuid",
   question: "shall we create test?",
   answer: "yes!"
 };
+
+const questionUUID2 = {
+  id: "uuid2",  
+  question: "shall we create another test?",
+  answer: "yes!!"
+};
+
 const initialStateWithQuestions = {
   ...initialState,
-  questionsById: { uuid: question },
+  questionsById: { uuid: questionUUID },
   questionsAllIds: ["uuid"]
 };
 
@@ -33,27 +41,25 @@ describe("QuestionAnswers reducer", () => {
     expect(
       questionsAnswers(initialState, {
         type: loadingQuestionsSuccess.type,
-        payload: [question]
+        payload: [questionUUID]
       })
     ).toEqual(initialStateWithQuestions);
   });
 
   it("should handle add new question state", () => {
-    const newQuestion = {
-      question: "shall we create another test?",
-      answer: "yes!!"
-    };
-
     const newState = {
       ...initialStateWithQuestions,
-      questionsById: { uuid: question, uuid2: { id: "uuid2", ...newQuestion } },
+      questionsById: {
+        uuid: questionUUID,
+        uuid2: { id: "uuid2", ...questionUUID2 }
+      },
       questionsAllIds: ["uuid", "uuid2"]
     };
     expect(
       questionsAnswers(initialStateWithQuestions, {
         type: addNewQuestion.type,
         payload: {
-          data: newQuestion,
+          data: questionUUID2,
           id: "uuid2"
         }
       })
@@ -71,27 +77,43 @@ describe("QuestionAnswers reducer", () => {
 
   it("should toggle sorting to Descending alphabetically for questions", () => {
     const stateDescending = {
-        ...initialState,
-        sortOption: 'ASCENDING'
-    }  
+      ...initialState,
+      sortOption: "ASCENDING"
+    };
     expect(
       questionsAnswers(initialState, {
         type: toggleSortOption.type,
-        payload: 'DESCENDING'
+        payload: "DESCENDING"
       })
     ).toEqual(stateDescending);
   });
 
   it("should toggle sorting to Ascending alphabetically for questions", () => {
     const stateDescending = {
-        ...initialState,
-        sortOption: 'DESCENDING'
-    }  
+      ...initialState,
+      sortOption: "DESCENDING"
+    };
     expect(
       questionsAnswers(initialState, {
         type: toggleSortOption.type,
-        payload: 'ASCENDING'
+        payload: "ASCENDING"
       })
     ).toEqual(stateDescending);
+  });
+  it("should delete a question based on id", () => {
+    const stateTwoQuestions = {
+      ...initialStateWithQuestions,
+      questionsById: {
+        uuid: questionUUID,
+        uuid2: { id: "uuid2", ...questionUUID2 }
+      },
+      questionsAllIds: ["uuid", "uuid2"]
+    };
+    expect(
+      questionsAnswers(stateTwoQuestions, {
+        type: deleteQuestion.type,
+        payload: { id: "uuid2" }
+      })
+    ).toEqual(initialStateWithQuestions);
   });
 });

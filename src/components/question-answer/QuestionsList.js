@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function QuestionList({ questions }) {
+function QuestionList({ questions, onDeleteQuestion }) {
   const classes = useStyles();
 
   return (
@@ -35,7 +35,13 @@ function QuestionList({ questions }) {
           </Paper>
         ) : (
           questions.map(question => {
-            return <QuestionItem key={question.id} qaItem={question} />;
+            return (
+              <QuestionItem
+                key={question.id}
+                onDeleteQuestion={onDeleteQuestion}
+                qaItem={question}
+              />
+            );
           })
         )}
       </Grid>

@@ -64,6 +64,22 @@ const QuestionsAnswersSlice = createSlice({
       state.error = initialState.error;
       state.isLoading = initialState.isLoading;
     },
+    deleteQuestion(state, action) {
+      const { id } = action.payload;
+      let questionFilteredIds = [];
+      let questionByIdFiltered = {};
+
+      questionFilteredIds = state.questionsAllIds.filter(CurrentId => id !== CurrentId);
+
+      questionFilteredIds.map(id => {
+        questionByIdFiltered[id] = state.questionsById[id];
+        return questionByIdFiltered;
+      });
+
+      state.questionsAllIds = questionFilteredIds;
+      state.questionsById = questionByIdFiltered;
+    },
+    
     toggleSortOption(state, action) {
       switch (action.payload) {
         case SortOptions.ASCENDING:
@@ -85,7 +101,8 @@ export const {
   loadingQuestionsFailure,
   addNewQuestion,
   removeAllQuestions,
-  toggleSortOption
+  toggleSortOption,
+  deleteQuestion
 } = QuestionsAnswersSlice.actions;
 
 async function getQuestions() {

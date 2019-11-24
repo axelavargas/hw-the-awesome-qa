@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { createSelector } from "@reduxjs/toolkit";
 import { connect, useDispatch } from "react-redux";
 import QuestionsList from "../../components/question-answer/QuestionsList";
-import Divider from "@material-ui/core/Divider";
 
 import {
   fetchQuestions,
   removeAllQuestions,
   toggleSortOption,
-  SortOptions
+  SortOptions,
+  deleteQuestion
 } from "./QuestionsAnswersSlice";
 import ActionsList from "../../components/question-answer/ActionsList";
 
@@ -59,7 +59,8 @@ const sortedQuestions = createSelector(
 const mapDispatch = {
   fetchQuestions,
   removeAllQuestions,
-  toggleSortOption
+  toggleSortOption,
+  deleteQuestion
 };
 
 const mapStateToProps = state => ({
@@ -76,6 +77,9 @@ function QuestionsAnswersList({ questions, sortedBy }) {
   function sortQA() {
     dispatch(toggleSortOption(sortedBy));
   }
+  function deleteQuestionById(id) {
+    dispatch(deleteQuestion({ id }));
+  }
 
   useEffect(() => {
     dispatch(fetchQuestions());
@@ -83,12 +87,14 @@ function QuestionsAnswersList({ questions, sortedBy }) {
 
   return (
     <>
-      <Divider variant="middle" />
+      <QuestionsList
+        questions={questions}
+        onDeleteQuestion={deleteQuestionById}
+      />
       <ActionsList
         onRemoveQuestions={() => removeAllQA()}
         onSortQuestions={() => sortQA()}
       />
-      <QuestionsList questions={questions} />
     </>
   );
 }
