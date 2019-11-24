@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 
 import TooltipPortal from "./TooltipPortal";
 
@@ -11,7 +11,10 @@ function Tooltip(props) {
   const [styleTooltip, setStyleTooltip] = useState(false);
 
   function showTooltip() {
-    return setVisible(true);
+    if (triggerRef && triggerRef.current) {
+      getPosition(triggerRef.current);
+    }
+    setVisible(true);
   }
 
   function hideTooltip() {
@@ -22,19 +25,40 @@ function Tooltip(props) {
     //get position and size of triggerRef
     const generalStyle = {
       position: "absolute",
-      background: "gray"
+      background: "gray",
+      width: "80%"
     };
-    const { left, right, top } = triggerRef.getBoundingClientRect();
-    const newLeft = left + (right - 10);
-    const newTop = top;
-    setStyleTooltip({ left: newLeft, top: newTop, ...generalStyle });
-  }
 
-  useEffect(() => {
-    if (triggerRef && triggerRef.current) {
-      getPosition(triggerRef.current);
+    //get scroll position
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
+    var vHeight = window.innerHeight;
+    var bodyHeight = document.body.clientHeight;
+
+    const { left, top, height, bottom } = triggerRef.getBoundingClientRect();
+
+    // by default display below the element
+    let tooltipTop = top + height + scrollY;
+    let tooltipBottom = null;
+
+    // if there is no room for the tooltip to show below
+    // DISCLAIMER: This is not a scalable solution
+    // to really find if the tooltip fits we must first render it
+    // get its height and check it here instead of the hard-coded value
+    if (vHeight - bottom < 40) {
+      tooltipTop = null;
+      tooltipBottom = bodyHeight - (top + scrollY);
     }
-  }, [triggerRef]);
+
+    const newLeft = scrollX + left;
+    setStyleTooltip({
+      left: newLeft,
+      top: tooltipTop,
+      bottom: tooltipBottom,
+      ...generalStyle
+    });
+  }
 
   //display tooltip using the Tooltip Portal
   return (
