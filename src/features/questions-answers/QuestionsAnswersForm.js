@@ -1,12 +1,8 @@
 import React from "react";
-import { connect, useDispatch } from "react-redux";
+import {useDispatch } from "react-redux";
 
 import QForm from "../../components/question-answer/QForm";
 import { addNewQuestion } from "./QuestionsAnswersSlice";
-
-const mapDispatch = {
-  addNewQuestion
-};
 
 function QuestionsAnswersForm() {
   const dispatch = useDispatch();
@@ -28,4 +24,4 @@ function QuestionsAnswersForm() {
   return <QForm onSubmit={handleSubmit} />;
 }
 
-export default connect(null, mapDispatch)(QuestionsAnswersForm);
+export default QuestionsAnswersForm;

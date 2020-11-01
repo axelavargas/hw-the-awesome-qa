@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import QuestionsList from "../../components/question-answer/QuestionsList";
 import ActionsList from "../../components/question-answer/ActionsList";
-import {sortedQuestions, sortedBy} from './QuestionAnswersSelectors';
+import {selectSortedQuestions, selectSortedBy} from './QuestionAnswersSelectors';
 
 import {
   fetchQuestions,
@@ -12,27 +12,16 @@ import {
   deleteQuestion
 } from "./QuestionsAnswersSlice";
 
-
-const mapDispatch = {
-  fetchQuestions,
-  removeAllQuestions,
-  toggleSortOption,
-  deleteQuestion
-};
-
-const mapStateToProps = state => ({
-  questions: sortedQuestions(state),
-  sortedBy: sortedBy(state)
-});
-
-function QuestionsAnswersList({ questions, sortedBy }) {
+function QuestionsAnswersList() {
   const dispatch = useDispatch();
+  const sortedQuestions = useSelector(selectSortedQuestions);
+  const sortedQuestionsBy = useSelector(selectSortedBy);
 
   function removeAllQA() {
     dispatch(removeAllQuestions());
   }
   function sortQA() {
-    dispatch(toggleSortOption(sortedBy));
+    dispatch(toggleSortOption(sortedQuestionsBy));
   }
   function deleteQuestionById(id) {
     dispatch(deleteQuestion({ id }));
@@ -45,7 +34,7 @@ function QuestionsAnswersList({ questions, sortedBy }) {
   return (
     <>
       <QuestionsList
-        questions={questions}
+        questions={sortedQuestions}
         onDeleteQuestion={deleteQuestionById}
       />
       <ActionsList
@@ -56,4 +45,4 @@ function QuestionsAnswersList({ questions, sortedBy }) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatch)(QuestionsAnswersList);
+export default QuestionsAnswersList;

@@ -3,7 +3,7 @@ import { SortOptions } from "./QuestionsAnswersSlice";
 
 const questionsById = state => state.questions.questionsById;
 const questionsAllIds = state => state.questions.questionsAllIds;
-export const sortedBy = state => state.questions.sortOption;
+export const selectSortedBy = state => state.questions.sortOption;
 
 const selectAllQA = createSelector(
   questionsAllIds,
@@ -26,9 +26,9 @@ function sortAlphabetically(a, b) {
   return 0;
 }
 
-export const sortedQuestions = createSelector(
+export const selectSortedQuestions = createSelector(
   selectAllQA,
-  sortedBy,
+  selectSortedBy,
   (questions, sortedBy) => {
     switch (sortedBy) {
       case SortOptions.ASCENDING:
